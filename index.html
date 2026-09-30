@@ -6,7 +6,7 @@
   <title>სკოლის სპორტის პროფესიული პორტალი</title>
   <!-- FontAwesome იკონებისთვის -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- CSS ფაილის დაკავშირება -->
+  <!-- CSS ფაილი -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,7 +21,7 @@
       <span>სკოლის სპორტი</span>
     </div>
 
-    <!-- ძებნის ფუნქცია -->
+    <!-- ძებნის ზოლი -->
     <div class="search-box">
       <i class="fa-solid fa-magnifying-glass"></i>
       <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="მოძებნე წესი ან სპორტი...">
@@ -37,7 +37,7 @@
     </nav>
   </header>
 
-  <!-- ბანერი -->
+  <!-- მთავარი ბანერი -->
   <section class="hero">
     <div class="hero-card">
       <h1><i class="fa-solid fa-graduation-cap"></i> ფიზიკური აღზრდის სასწავლო პორტალი</h1>
@@ -55,9 +55,29 @@
         <h2>ფეხბურთი</h2>
       </div>
 
+      <!-- მოედნის ვიზუალიზაცია (SVG სქემა + ფოტო) -->
       <div class="court-wrapper">
-        <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=80" alt="ფეხბურთის მოედანი" class="court-img">
-        <div class="court-badge"><i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 105მ × 68მ | კარის ზომა: 7.32მ × 2.44მ</div>
+        <div class="court-svg-container">
+          <svg viewBox="0 0 800 500" class="court-svg">
+            <!-- მინდორი -->
+            <rect x="0" y="0" width="800" height="500" fill="#15803d" rx="15"/>
+            <!-- გარეთა ხაზი -->
+            <rect x="30" y="30" width="740" height="440" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <!-- ცენტრალური ხაზი და წრე -->
+            <line x1="400" y1="30" x2="400" y2="470" stroke="#ffffff" stroke-width="4"/>
+            <circle cx="400" cy="250" r="70" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <circle cx="400" cy="250" r="5" fill="#ffffff"/>
+            <!-- მარცხენა საჯარიმო -->
+            <rect x="30" y="120" width="130" height="260" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <rect x="30" y="180" width="45" height="140" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <!-- მარჯვენა საჯარიმო -->
+            <rect x="640" y="120" width="130" height="260" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <rect x="725" y="180" width="45" height="140" fill="none" stroke="#ffffff" stroke-width="4"/>
+          </svg>
+        </div>
+        <div class="court-badge">
+          <i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 105მ × 68მ | კარის ზომა: 7.32მ × 2.44მ
+        </div>
       </div>
 
       <div class="rules-grid">
@@ -91,9 +111,28 @@
         <h2>კალათბურთი</h2>
       </div>
 
+      <!-- მოედნის ვიზუალიზაცია (SVG სქემა) -->
       <div class="court-wrapper">
-        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80" alt="კალათბურთის მოედანი" class="court-img">
-        <div class="court-badge"><i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 28მ × 15მ | ფარის სიმაღლე: 3.05მ</div>
+        <div class="court-svg-container">
+          <svg viewBox="0 0 800 450" class="court-svg">
+            <!-- პარკეტი -->
+            <rect x="0" y="0" width="800" height="450" fill="#c2410c" rx="15"/>
+            <!-- საზღვარი -->
+            <rect x="20" y="20" width="760" height="410" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <!-- ცენტრი -->
+            <line x1="400" y1="20" x2="400" y2="430" stroke="#ffffff" stroke-width="4"/>
+            <circle cx="400" cy="225" r="50" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <!-- მარცხენა 3-ქულიანი და საჯარიმო -->
+            <path d="M 20,60 A 200,200 0 0,1 20,390" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <rect x="20" y="145" width="140" height="160" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <!-- მარჯვენა 3-ქულიანი და საჯარიმო -->
+            <path d="M 780,60 A 200,200 0 0,0 780,390" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <rect x="640" y="145" width="140" height="160" fill="none" stroke="#ffffff" stroke-width="4"/>
+          </svg>
+        </div>
+        <div class="court-badge">
+          <i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 28მ × 15მ | ფარის სიმაღლე: 3.05მ
+        </div>
       </div>
 
       <div class="rules-grid">
@@ -127,9 +166,24 @@
         <h2>ფრენბურთი</h2>
       </div>
 
+      <!-- მოედნის ვიზუალიზაცია (SVG სქემა) -->
       <div class="court-wrapper">
-        <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=1200&q=80" alt="ფრენბურთის მოედანი" class="court-img">
-        <div class="court-badge"><i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 18მ × 9მ | ბადის სიმაღლე: 2.43მ (კაცები) / 2.24მ (ქალები)</div>
+        <div class="court-svg-container">
+          <svg viewBox="0 0 800 450" class="court-svg">
+            <!-- მოედანი -->
+            <rect x="0" y="0" width="800" height="450" fill="#0284c7" rx="15"/>
+            <!-- საზღვრები -->
+            <rect x="40" y="40" width="720" height="370" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <!-- ცენტრალური ბადე -->
+            <line x1="400" y1="20" x2="400" y2="430" stroke="#facc15" stroke-width="8"/>
+            <!-- თავდასხმის ხაზები (3-მეტრიანი) -->
+            <line x1="280" y1="40" x2="280" y2="410" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,5"/>
+            <line x1="520" y1="40" x2="520" y2="410" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,5"/>
+          </svg>
+        </div>
+        <div class="court-badge">
+          <i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 18მ × 9მ | ბადის სიმაღლე: 2.43მ (კაცები) / 2.24მ (ქალები)
+        </div>
       </div>
 
       <div class="rules-grid">
@@ -168,11 +222,11 @@
         <div class="widget-card">
           <h3><i class="fa-solid fa-weight-scale"></i> BMI კალკულატორი</h3>
           <div class="input-group">
-            <label>წონა (კგ):</label>
+            <label for="weight">წონა (კგ):</label>
             <input type="number" id="weight" placeholder="მაგ: 65">
           </div>
           <div class="input-group">
-            <label>სიმაღლე (სმ):</label>
+            <label for="height">სიმაღლე (სმ):</label>
             <input type="number" id="height" placeholder="მაგ: 175">
           </div>
           <button class="btn-calc" onclick="calculateBMI()">გამოთვლა</button>
@@ -200,7 +254,7 @@
     <p>&copy; 2026 სკოლის სპორტული პორტალი | დამზადებულია სასწავლო პროექტისთვის</p>
   </footer>
 
-  <!-- JavaScript ფაილის დაკავშირება -->
+  <!-- JavaScript ფაილი -->
   <script src="script.js"></script>
 </body>
 </html>
