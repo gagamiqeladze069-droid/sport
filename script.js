@@ -10,7 +10,7 @@ resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
 const particles = [];
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 45; i++) {
   particles.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
@@ -22,7 +22,7 @@ for (let i = 0; i < 40; i++) {
 
 function animateParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'rgba(56, 239, 125, 0.4)';
+  ctx.fillStyle = 'rgba(56, 239, 125, 0.5)';
   ctx.strokeStyle = 'rgba(56, 239, 125, 0.08)';
 
   particles.forEach((p, index) => {
@@ -66,7 +66,7 @@ function calculateBMI() {
   const bmi = (weight / (height * height)).toFixed(1);
   let status = '';
 
-  if (bmi < 18.5) status = 'წონის დეფიციტი ⚠️';
+  if (bmi < 18.5) status = 'წონის დეფიციტი ⚠️️';
   else if (bmi < 25) status = 'ნორმალური წონა ✅';
   else if (bmi < 30) status = 'ჭარბი წონა ⚠️';
   else status = 'სიმსუქნე ❌';
@@ -99,7 +99,7 @@ function checkQuiz(element, isCorrect) {
 /* --- D. ძებნის ფუნქცია --- */
 function filterCards() {
   const query = document.getElementById('searchInput').value.toLowerCase();
-  const cards = document.querySelectorAll('.rule-card, .sport-section');
+  const cards = document.querySelectorAll('.rule-card');
 
   cards.forEach(card => {
     const text = card.innerText.toLowerCase();
