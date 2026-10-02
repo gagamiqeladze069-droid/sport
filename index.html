@@ -3,28 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>სკოლის სპორტის პროფესიული პორტალი</title>
-  <!-- FontAwesome იკონებისთვის -->
+  <title>სკოლის სპორტული პორტალი Pro</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- CSS ფაილი -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Canvas ანიმაციური ფონისთვის -->
-  <canvas id="bg-canvas"></canvas>
-
-  <!-- ჰედერი & ნავიგაცია -->
+  <!-- ჰედერი -->
   <header>
     <div class="logo">
       <i class="fa-solid fa-trophy"></i>
-      <span>სკოლის სპორტი</span>
+      <span>სპორტული პორტალი</span>
     </div>
 
-    <!-- ძებნის ზოლი -->
     <div class="search-box">
       <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="მოძებნე წესი ან სპორტი...">
+      <input type="text" id="searchInput" onkeyup="filterContent()" placeholder="მოძებნე წესი, სპორტი ან ტაქტიკა...">
     </div>
 
     <nav>
@@ -32,229 +26,268 @@
         <li><a href="#football"><i class="fa-solid fa-futbol"></i> ფეხბურთი</a></li>
         <li><a href="#basketball"><i class="fa-solid fa-basketball"></i> კალათბურთი</a></li>
         <li><a href="#volleyball"><i class="fa-solid fa-volleyball"></i> ფრენბურთი</a></li>
-        <li><a href="#interactive"><i class="fa-solid fa-calculator"></i> ხელსაწყოები</a></li>
+        <li><a href="#quizzes"><i class="fa-solid fa-brain"></i> ქვიზები</a></li>
+        <li><a href="#bmi"><i class="fa-solid fa-calculator"></i> BMI</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- მთავარი ბანერი -->
+  <!-- ბანერი -->
   <section class="hero">
     <div class="hero-card">
-      <h1><i class="fa-solid fa-graduation-cap"></i> ფიზიკური აღზრდის სასწავლო პორტალი</h1>
-      <p>პროფესიული გზამკვლევი მოსწავლეებისა და მასწავლებლებისთვის: წესები, მოედნის სქემები და ჯანსაღი ცხოვრების კალკულატორები.</p>
+      <h1><i class="fa-solid fa-graduation-cap"></i> სასკოლო სპორტის პროფესიული გზამკვლევი</h1>
+      <p>შეისწავლეთ წესები, მოედნის სტანდარტები, ტაქტიკური სტილები მოედანზე ვიზუალიზაციით და გამოსცადეთ ცოდნა სპორტულ ქვიზებში.</p>
     </div>
   </section>
 
   <!-- მთავარი კონტენტი -->
   <main class="container">
 
-    <!-- 1. ფეხბურთის სექცია -->
+    <!-- ================= 1. ფეხბურთი ================= -->
     <section id="football" class="sport-section">
       <div class="section-header">
         <i class="fa-solid fa-futbol"></i>
         <h2>ფეხბურთი</h2>
       </div>
 
-      <!-- მოედნის ვიზუალიზაცია (SVG სქემა + ფოტო) -->
+      <!-- მოედანი -->
       <div class="court-wrapper">
         <div class="court-svg-container">
-          <svg viewBox="0 0 800 500" class="court-svg">
-            <!-- მინდორი -->
+          <svg viewBox="0 0 800 500" class="court-svg" id="footballPitch">
             <rect x="0" y="0" width="800" height="500" fill="#15803d" rx="15"/>
-            <!-- გარეთა ხაზი -->
+            <!-- ზოლები -->
+            <g opacity="0.15">
+              <rect x="0" y="0" width="100" height="500" fill="#ffffff"/>
+              <rect x="200" y="0" width="100" height="500" fill="#ffffff"/>
+              <rect x="400" y="0" width="100" height="500" fill="#ffffff"/>
+              <rect x="600" y="0" width="100" height="500" fill="#ffffff"/>
+            </g>
             <rect x="30" y="30" width="740" height="440" fill="none" stroke="#ffffff" stroke-width="4"/>
-            <!-- ცენტრალური ხაზი და წრე -->
             <line x1="400" y1="30" x2="400" y2="470" stroke="#ffffff" stroke-width="4"/>
             <circle cx="400" cy="250" r="70" fill="none" stroke="#ffffff" stroke-width="4"/>
             <circle cx="400" cy="250" r="5" fill="#ffffff"/>
-            <!-- მარცხენა საჯარიმო -->
+            <!-- საჯარიმოები -->
             <rect x="30" y="120" width="130" height="260" fill="none" stroke="#ffffff" stroke-width="4"/>
             <rect x="30" y="180" width="45" height="140" fill="none" stroke="#ffffff" stroke-width="4"/>
-            <!-- მარჯვენა საჯარიმო -->
             <rect x="640" y="120" width="130" height="260" fill="none" stroke="#ffffff" stroke-width="4"/>
             <rect x="725" y="180" width="45" height="140" fill="none" stroke="#ffffff" stroke-width="4"/>
+
+            <!-- ტაქტიკური შრე -->
+            <g id="footballTacticsLayer"></g>
           </svg>
         </div>
-        <div class="court-badge">
-          <i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 105მ × 68მ | კარის ზომა: 7.32მ × 2.44მ
+        <div class="court-badge" id="footballBadge">
+          <i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 105მ × 68მ | კარი: 7.32მ × 2.44მ
         </div>
       </div>
 
+      <!-- თამაშის სტილები -->
+      <h3 class="subsection-title"><i class="fa-solid fa-chess"></i> თამაშის სტილები & ტაქტიკა</h3>
+      <div class="tactics-grid">
+        <div class="tactic-card active" onclick="setTactics('football', 'tikitaka', this)">
+          <h4><i class="fa-solid fa-diagram-project"></i> Tiki-Taka (ტიკი-ტაკა)</h4>
+          <p>მოკლე პასები, ბურთის უწყვეტი ფლობა და სამკუთხედების შექმნა მოედანზე.</p>
+        </div>
+        <div class="tactic-card" onclick="setTactics('football', 'parkthebus', this)">
+          <h4><i class="fa-solid fa-shield-halved"></i> Park the Bus (ავტობუსი)</h4>
+          <p>ღრმა დაცვითი ბლოკი საკუთარ საჯარიმოში და სწრაფი კონტრშეტევები.</p>
+        </div>
+        <div class="tactic-card" onclick="setTactics('football', 'gegenpressing', this)">
+          <h4><i class="fa-solid fa-bolt"></i> Gegenpressing (გეგენპრესინგი)</h4>
+          <p>აგრესიული მაღალი პრესინგი ბურთის დაკარგვისთანავე მეტოქის ნახევარზე.</p>
+        </div>
+      </div>
+
+      <!-- წესები -->
+      <h3 class="subsection-title"><i class="fa-solid fa-book"></i> ძირითადი წესები</h3>
       <div class="rules-grid">
         <div class="rule-card">
           <i class="fa-solid fa-users"></i>
-          <h3>მოთამაშეები</h3>
-          <p>თითო გუნდში 11 მოთამაშეა (1 მეკარე + 10 ველის მოთამაშე). განაცხადში ცვლილებების რაოდენობა რეგულირდება ტურნირის წესით.</p>
+          <h3>შემადგენლობა</h3>
+          <p>მოედანზე 11 მოთამაშეა (1 მეკარე + 10 ველის მოთამაშე).</p>
         </div>
         <div class="rule-card">
           <i class="fa-solid fa-stopwatch"></i>
           <h3>ხანგრძლივობა</h3>
-          <p>მატჩი შედგება ორი 45-წუთიანი ტაიმისგან. ტაიმებს შორის არის 15-წუთიანი შესვენება.</p>
+          <p>ორი 45-წუთიანი ტაიმი 15-წუთიანი შესვენებით.</p>
         </div>
         <div class="rule-card">
           <i class="fa-solid fa-flag"></i>
-          <h3>თამაშგარე (Offside)</h3>
-          <p>მოთამაშე თამაშგარეშია, თუ პასის მომენტში მეტოქის ნახევარზე უფრო ახლოსაა კართან, ვიდრე ბურთი და ბოლო მცველი.</p>
-        </div>
-        <div class="rule-card">
-          <i class="fa-solid fa-hand"></i>
-          <h3>ხელით თამაში</h3>
-          <p>ხელით თამაში აკრძალულია ყველასთვის, გარდა მეკარისა (საკუთარ საჯარიმოში). დარღვევა ისჯება ჯარიმით ან პენალტით.</p>
+          <h3>თამაშგარე</h3>
+          <p>მოთამაშე თამაშგარეშია, თუ პასისას მეტოქის ნახევარზე უფრო ახლოსაა კართან, ვიდრე ბურთი და ბოლო მცველი.</p>
         </div>
       </div>
     </section>
 
-    <!-- 2. კალათბურთის სექცია -->
+    <!-- ================= 2. კალათბურთი ================= -->
     <section id="basketball" class="sport-section">
       <div class="section-header">
         <i class="fa-solid fa-basketball"></i>
         <h2>კალათბურთი</h2>
       </div>
 
-      <!-- მოედნის ვიზუალიზაცია (SVG სქემა) -->
       <div class="court-wrapper">
         <div class="court-svg-container">
-          <svg viewBox="0 0 800 450" class="court-svg">
-            <!-- პარკეტი -->
+          <svg viewBox="0 0 800 450" class="court-svg" id="basketballPitch">
             <rect x="0" y="0" width="800" height="450" fill="#c2410c" rx="15"/>
-            <!-- საზღვარი -->
             <rect x="20" y="20" width="760" height="410" fill="none" stroke="#ffffff" stroke-width="4"/>
-            <!-- ცენტრი -->
             <line x1="400" y1="20" x2="400" y2="430" stroke="#ffffff" stroke-width="4"/>
             <circle cx="400" cy="225" r="50" fill="none" stroke="#ffffff" stroke-width="4"/>
-            <!-- მარცხენა 3-ქულიანი და საჯარიმო -->
+            <!-- 3-ქულიანები -->
             <path d="M 20,60 A 200,200 0 0,1 20,390" fill="none" stroke="#ffffff" stroke-width="4"/>
-            <rect x="20" y="145" width="140" height="160" fill="none" stroke="#ffffff" stroke-width="4"/>
-            <!-- მარჯვენა 3-ქულიანი და საჯარიმო -->
+            <rect x="20" y="145" width="140" height="160" fill="rgba(255,255,255,0.1)" stroke="#ffffff" stroke-width="4"/>
             <path d="M 780,60 A 200,200 0 0,0 780,390" fill="none" stroke="#ffffff" stroke-width="4"/>
-            <rect x="640" y="145" width="140" height="160" fill="none" stroke="#ffffff" stroke-width="4"/>
+            <rect x="640" y="145" width="140" height="160" fill="rgba(255,255,255,0.1)" stroke="#ffffff" stroke-width="4"/>
+
+            <g id="basketballTacticsLayer"></g>
           </svg>
         </div>
-        <div class="court-badge">
+        <div class="court-badge" id="basketballBadge">
           <i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 28მ × 15მ | ფარის სიმაღლე: 3.05მ
         </div>
       </div>
 
+      <h3 class="subsection-title"><i class="fa-solid fa-chess"></i> თამაშის სტილები & ტაქტიკა</h3>
+      <div class="tactics-grid">
+        <div class="tactic-card active" onclick="setTactics('basketball', 'paceandspace', this)">
+          <h4><i class="fa-solid fa-arrows-split-up-and-left"></i> Pace & Space</h4>
+          <p>სწრაფი ტემპი, მოთამაშეთა განტვირთვა პერიმეტრზე და 3-ქულიანები.</p>
+        </div>
+        <div class="tactic-card" onclick="setTactics('basketball', 'triangle', this)">
+          <h4><i class="fa-solid fa-shapes"></i> Triangle Offense</h4>
+          <p>ლეგენდარული სამკუთხედის შეტევა პოსტისა და ფლანგების თანამშრომლობით.</p>
+        </div>
+        <div class="tactic-card" onclick="setTactics('basketball', 'pickandroll', this)">
+          <h4><i class="fa-solid fa-person-running"></i> Pick & Roll</h4>
+          <p>გამთამაშებლისა და ცენტრის ბლოკი ბურთით შეტევის გასახსნელად.</p>
+        </div>
+      </div>
+
+      <h3 class="subsection-title"><i class="fa-solid fa-book"></i> ძირითადი წესები</h3>
       <div class="rules-grid">
         <div class="rule-card">
           <i class="fa-solid fa-users"></i>
           <h3>შემადგენლობა</h3>
-          <p>მოედანზე ერთდროულად 5 მოთამაშეა თითო გუნდიდან. ცვლილებები შეუზღუდავია თამაშის შეჩერების დროს.</p>
+          <p>მოედანზე ერთდროულად 5 მოთამაშეა თითო გუნდიდან.</p>
         </div>
         <div class="rule-card">
           <i class="fa-solid fa-bullseye"></i>
-          <h3>ქულათა სისტემა</h3>
-          <p>ჩვეულებრივი ჩაგდება = 2 ქულა; 6.75მ რკალს გარედ = 3 ქულა; საჯარიმო ტყორცნა = 1 ქულა.</p>
+          <h3>ქულები</h3>
+          <p>ჩვეულებრივი = 2 ქულა; 6.75მ რკალს გარეთ = 3 ქულა; საჯარიმო = 1 ქულა.</p>
         </div>
         <div class="rule-card">
           <i class="fa-solid fa-hourglass-start"></i>
           <h3>24 წამის წესი</h3>
-          <p>გუნდს შეტევის დასასრულებლად ეძლევა 24 წამი. ბურთის საკუთარი ნახევრიდან გადატანისთვის აქვს 8 წამი.</p>
-        </div>
-        <div class="rule-card">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          <h3>პრობელები & ჯარიმა</h3>
-          <p>ბურთის აკენწლის გარეშე 2 ნაბიჯზე მეტი ითვლება პრობელად. 5 პერსონალური ჯარიმის მიღებისას მოთამაშე ტოვებს მოედანს.</p>
+          <p>გუნდს შეტევის დასასრულებლად ეძლევა 24 წამი.</p>
         </div>
       </div>
     </section>
 
-    <!-- 3. ფრენბურთის სექცია -->
+    <!-- ================= 3. ფრენბურთი ================= -->
     <section id="volleyball" class="sport-section">
       <div class="section-header">
         <i class="fa-solid fa-volleyball"></i>
         <h2>ფრენბურთი</h2>
       </div>
 
-      <!-- მოედნის ვიზუალიზაცია (SVG სქემა) -->
       <div class="court-wrapper">
         <div class="court-svg-container">
-          <svg viewBox="0 0 800 450" class="court-svg">
-            <!-- მოედანი -->
+          <svg viewBox="0 0 800 450" class="court-svg" id="volleyballPitch">
             <rect x="0" y="0" width="800" height="450" fill="#0284c7" rx="15"/>
-            <!-- საზღვრები -->
             <rect x="40" y="40" width="720" height="370" fill="none" stroke="#ffffff" stroke-width="4"/>
-            <!-- ცენტრალური ბადე -->
             <line x1="400" y1="20" x2="400" y2="430" stroke="#facc15" stroke-width="8"/>
-            <!-- თავდასხმის ხაზები (3-მეტრიანი) -->
             <line x1="280" y1="40" x2="280" y2="410" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,5"/>
             <line x1="520" y1="40" x2="520" y2="410" stroke="#ffffff" stroke-width="4" stroke-dasharray="10,5"/>
+
+            <g id="volleyballTacticsLayer"></g>
           </svg>
         </div>
-        <div class="court-badge">
-          <i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 18მ × 9მ | ბადის სიმაღლე: 2.43მ (კაცები) / 2.24მ (ქალები)
+        <div class="court-badge" id="volleyballBadge">
+          <i class="fa-solid fa-ruler-combined"></i> სტანდარტული მოედანი: 18მ × 9მ | ბადე: 2.43მ / 2.24მ
         </div>
       </div>
 
+      <h3 class="subsection-title"><i class="fa-solid fa-chess"></i> თამაშის სტილები & ტაქტიკა</h3>
+      <div class="tactics-grid">
+        <div class="tactic-card active" onclick="setTactics('volleyball', 'system51', this)">
+          <h4><i class="fa-solid fa-user-gear"></i> 5-1 სისტემა</h4>
+          <p>1 ძირითადი გამთამაშებელი და 5 შემტევი - პროფესიონალური სტანდარტი.</p>
+        </div>
+        <div class="tactic-card" onclick="setTactics('volleyball', 'fasttempo', this)">
+          <h4><i class="fa-solid fa-gauge-high"></i> სწრაფი ტემპი</h4>
+          <p>დაბალი და სწრაფი პასები ბლოკზე დასასწრებად.</p>
+        </div>
+        <div class="tactic-card" onclick="setTactics('volleyball', 'system62', this)">
+          <h4><i class="fa-solid fa-users-gear"></i> 6-2 სისტემა</h4>
+          <p>2 გამთამაშებლით თამაში - წინა ხაზზე ყოველთვის 3 შემტევია.</p>
+        </div>
+      </div>
+
+      <h3 class="subsection-title"><i class="fa-solid fa-book"></i> ძირითადი წესები</h3>
       <div class="rules-grid">
         <div class="rule-card">
           <i class="fa-solid fa-arrows-rotate"></i>
           <h3>როტაცია</h3>
-          <p>მოედანზე 6 მოთამაშეა. ჩაწოდების უფლების მოპოვებისას მოთამაშეები საათის ისრის მიმართულებით გადანაცვლდებიან.</p>
+          <p>მოედანზე 6 მოთამაშეა. ჩაწოდების მოპოვებისას გადანაცვლება ხდება საათის ისრის მიმართულებით.</p>
         </div>
         <div class="rule-card">
           <i class="fa-solid fa-hand-holding-hand"></i>
-          <h3>3 შეხების წესი</h3>
-          <p>გუნდს აქვს ბურთის მაქსიმუმ 3-ჯერ შეხების უფლება გადატანამდე. ერთი მოთამაშე ზედიზედ ორჯერ ვერ შეეხება.</p>
+          <h3>3 შეხება</h3>
+          <p>გუნდს აქვს ბურთის მაქსიმუმ 3-ჯერ შეხების უფლება გადატანამდე.</p>
         </div>
         <div class="rule-card">
           <i class="fa-solid fa-trophy"></i>
-          <h3>ქულები & სეტები</h3>
-          <p>თამაში მიდის 3 მოგებულ სეტამდე. სეტი თამაშდება 25 ქულამდე (მინიმუმ 2 ქულიანი სხვაობით).</p>
-        </div>
-        <div class="rule-card">
-          <i class="fa-solid fa-ban"></i>
-          <h3>ბადის წესი</h3>
-          <p>თამაშის პროცესში ბადეზე შეხება აკრძალულია. ჩაწოდებისას უკანა ხაზზე დაბიჯება ითვლება შეცდომად.</p>
+          <h3>სეტები</h3>
+          <p>თამაში მიდის 3 მოგებულ სეტამდე (25 ქულამდე).</p>
         </div>
       </div>
     </section>
 
-    <!-- 4. ინტერაქტიული ინსტრუმენტები -->
-    <section id="interactive" class="sport-section">
+    <!-- ================= 4. ქვიზების სექცია ================= -->
+    <section id="quizzes" class="sport-section">
       <div class="section-header">
-        <i class="fa-solid fa-sliders"></i>
-        <h2>ინტერაქტიული ინსტრუმენტები & ვიქტორინა</h2>
+        <i class="fa-solid fa-brain"></i>
+        <h2>სპორტული ქვიზები</h2>
       </div>
 
-      <div class="interactive-grid">
-        <!-- BMI კალკულატორი -->
-        <div class="widget-card">
-          <h3><i class="fa-solid fa-weight-scale"></i> BMI კალკულატორი</h3>
-          <div class="input-group">
-            <label for="weight">წონა (კგ):</label>
-            <input type="number" id="weight" placeholder="მაგ: 65">
-          </div>
-          <div class="input-group">
-            <label for="height">სიმაღლე (სმ):</label>
-            <input type="number" id="height" placeholder="მაგ: 175">
-          </div>
-          <button class="btn-calc" onclick="calculateBMI()">გამოთვლა</button>
-          <div class="calc-result" id="bmiResult">შეიყვანეთ მონაცემები</div>
-        </div>
+      <div class="quiz-tab-buttons">
+        <button class="tab-btn active" onclick="switchQuiz('football', this)"><i class="fa-solid fa-futbol"></i> ფეხბურთის ქვიზი</button>
+        <button class="tab-btn" onclick="switchQuiz('basketball', this)"><i class="fa-solid fa-basketball"></i> კალათბურთის ქვიზი</button>
+        <button class="tab-btn" onclick="switchQuiz('volleyball', this)"><i class="fa-solid fa-volleyball"></i> ფრენბურთის ქვიზი</button>
+      </div>
 
-        <!-- სწრაფი ვიქტორინა -->
-        <div class="widget-card">
-          <h3><i class="fa-solid fa-circle-question"></i> სპორტული ტესტი</h3>
-          <p id="quizQuestion" style="margin-bottom: 10px; font-weight:600;">რამდენი მოთამაშეა ფეხბურთის ერთ გუნდში მოედანზე?</p>
-          <div id="quizOptions">
-            <div class="quiz-option" onclick="checkQuiz(this, false)">A) 9 მოთამაშე</div>
-            <div class="quiz-option" onclick="checkQuiz(this, true)">B) 11 მოთამაშე</div>
-            <div class="quiz-option" onclick="checkQuiz(this, false)">C) 5 მოთამაშე</div>
-          </div>
-          <div class="calc-result" id="quizResult" style="display:none;"></div>
+      <div class="quiz-container">
+        <div id="quizContent"></div>
+      </div>
+    </section>
+
+    <!-- ================= 5. BMI კალკულატორი ================= -->
+    <section id="bmi" class="sport-section">
+      <div class="section-header">
+        <i class="fa-solid fa-calculator"></i>
+        <h2>BMI (სხეულის მასის ინდექსი)</h2>
+      </div>
+
+      <div class="widget-card">
+        <div class="input-group">
+          <label>წონა (კგ):</label>
+          <input type="number" id="weight" placeholder="მაგ: 65">
         </div>
+        <div class="input-group">
+          <label>სიმაღლე (სმ):</label>
+          <input type="number" id="height" placeholder="მაგ: 175">
+        </div>
+        <button class="btn-calc" onclick="calculateBMI()">გამოთვლა</button>
+        <div class="calc-result" id="bmiResult">შეიყვანეთ მონაცემები</div>
       </div>
     </section>
 
   </main>
 
-  <!-- ფუტერი -->
   <footer>
-    <p>&copy; 2026 სკოლის სპორტული პორტალი | დამზადებულია სასწავლო პროექტისთვის</p>
+    <p>&copy; 2026 სკოლის სპორტული პორტალი Pro | სასწავლო პროექტი</p>
   </footer>
 
-  <!-- JavaScript ფაილი -->
   <script src="script.js"></script>
 </body>
 </html>
